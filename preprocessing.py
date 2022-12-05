@@ -3,6 +3,8 @@ import spacy
 import pandas as pd
 from nltk import word_tokenize
 from langdetect import detect_langs
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
 from nltk.parse.stanford import StanfordDependencyParser
 
 def textclean(text):
@@ -26,9 +28,6 @@ def nostopwords(text):
   text = [word.text.strip() for word in sentence if not word.is_stop and not word.is_punct]
   return text
 
-
-
-
 def n_words(df):
   tweet_tokens = [word_tokenize(item) for item in df.Tweets]
   len_tokens = []
@@ -49,11 +48,21 @@ def getSubjectivity(text):
 def getPolarity(text):
   return TextBlob(text).sentiment.polarity  # type: ignore
 
-def getSentiment(score):
-  if score < 0:
-    return "Negative"
-  if score == 0:
-    return "Neutral"
-  else:
-    return "Positive"
+def stemming(text):
+  stemmer = PorterStemmer()
+  text = [stemmer.stem(word) for word in text]
+  return text
+
+def lemming(text):
+  lemmatizer = WordNetLemmatizer()
+  text = [lemmatizer.lemmatize(word) for word in text]
+  return text
+
+# def getSentiment(score):
+#   if score < 0:
+#     return "Negative"
+#   if score == 0:
+#     return "Neutral"
+#   else:
+#     return "Positive"
 

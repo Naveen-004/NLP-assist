@@ -29,14 +29,16 @@ if file_up is not None:
     st.sidebar.header("Select Variable")
     selected = st.sidebar.selectbox('Variables', obj)
 
-    tasks = ['Tokenization', 'POS tag', 'Stemming', 'Lemming', 'Stop-word Removal', 'Text sense']
-    tasks_func = [tokenize(df, selected), df.selected.apply(nostopwords) ]
+    tasks = ['Tokenization', 'POS tag', 'Stemming', 'Lemming', 'Stop-word Removal']
+    tasks_func = [tokenize(df, selected),\
+                    df[selected].apply(nostopwords),\
+                    df[selected].apply(stemming),\
+                    df[selected].apply(lemming),\
+                    df[selected].apply(nostopwords)]
 
     st.sidebar.header("Select NLP Task")
     task = st.sidebar.multiselect('Tasks', tasks)
-    st.write()
-
-
-
-
+    result = map(tasks, tasks_func)
+    for i in result:
+        st.write(i)
     
