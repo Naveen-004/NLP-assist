@@ -39,9 +39,12 @@ if file_up is not None:
     st.header("Select Variable")
     selected = st.selectbox('Variables', obj)
     st.write('Selected Variable ➡️ ', selected)
+
+    st.subheader('Exploratory Data Analysis on Selected Variable')
     eda = Nlpeda(df, selected, analyse= 'basic')  
     st.write(eda.df)
 
+    st.subheader('Text Preprocessing on Selected Variable') 
     pure = NLAutoPurifier(df, selected)
     st.write(pure)
 
@@ -73,5 +76,13 @@ if file_up is not None:
             output = tc(payload)
             final_df.append(output)
 
-    st.write(final_df)
+    def convert(df):
+        return df.to_csv().encode('utf-8')
+    final_df = pd.DataFrame(final_df)
+    st.dataframe(final_df)
+    csv = convert(final_df)
+    st.download_button(label='Download CSV',
+                       data=csv,
+                       file_name='output.csv',
+                       mime='text/csv')
     
