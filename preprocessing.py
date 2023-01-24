@@ -1,13 +1,15 @@
 import re
 import spacy
 import pandas as pd
+import nltk
 from nltk import word_tokenize
 from langdetect import detect_langs
 from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 from nltk.parse.stanford import StanfordDependencyParser
 
-def textclean(text):
+
+def textClean(text):
     text = re.sub(r'@[A-Za-z0-9]+', '', text) # removed @mentions
     text = re.sub(r'#','',text) # remove the hash tag
     text = re.sub(r'RT[\s]+','',text) # remove RT
@@ -22,17 +24,18 @@ def tokenize(df, column):
   df['tokens'] = tokens
   return df
 
-def nostopwords(text):
+def noStopWords(text):
   nlp = spacy.load('en_core_web_sm')
   sentence = nlp(text)
   text = [word.text.strip() for word in sentence if not word.is_stop and not word.is_punct]
   return text
 
-def n_words(df):
-  tweet_tokens = [word_tokenize(item) for item in df.Tweets]
+def nWords(df):
+  nltk.download('all')
+  tokens = [word_tokenize(item) for item in df]
   len_tokens = []
-  for i in range(len(tweet_tokens)):
-    len_tokens.append(len(tweet_tokens[i]))
+  for i in range(len(tokens)):
+    len_tokens.append(len(tokens[i]))
   return len_tokens
 
 def getLanguages(df):
