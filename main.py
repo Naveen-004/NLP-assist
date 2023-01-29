@@ -35,14 +35,53 @@ if file_up is not None:
             obj.append(i)
         else:pass
 
-    st.header("Select Variable")
-    selected = st.selectbox('Variables', obj)
-    st.write('Selected Variable ➡️ ', selected)
+    st.header("Select Variables")
+    selected = st.multiselect('Variables', obj)
+    st.write(len(selected), 'variables selected')
 
-    st.subheader('Exploratory Data Analysis on Selected Variable')
-    df['n_words'] = nWords(df[selected])
-    view_button = st.button('👀View Dataframe', disabled=False)
-    if view_button:
+    st.subheader('Exploratory Data Analysis on Selected Variables')
+    eda_tasks = st.multiselect('EDA Tasks', 
+                               ['N Words', 'Language Detection', 
+                                'Subjectivity', 'Polarity', 
+                                'Sentiment'])
+    # n words
+    if len(selected) < 1:
+        df['n_words'] = df[selected].apply(lambda x: nWords(str(x)))
+    else:
+        for i in selected:
+            df['n_words'+' '+str(i)] = df[i].apply(lambda x: nWords(str(x)))
+    # Language Detection
+    if len(selected) < 1:
+        df['languages'] = df[selected].apply(lambda x: getLanguages(str(x)))
+    else:
+        for i in selected:
+            df['languages'+' '+str(i)] = df[i].apply(lambda x: getLanguages(str(x)))
+    # subjectivity
+    if len(selected) < 1:
+        df['subjectivity'] = df[selected].apply(lambda x: getSubjectivity(str(x)))
+    else:
+        for i in selected:
+            df['subjectivity'+' '+str(i)] = df[i].apply(lambda x: getSubjectivity(str(x)))
+    # polarity
+    if len(selected) < 1:
+        df['polarity'] = df[selected].apply(lambda x: getPolarity(str(x)))
+    else:
+        for i in selected:
+            df['polarity'+' '+str(i)] = df[i].apply(lambda x: getPolarity(str(x)))
+    # Sentiment
+    if len(selected) < 1:
+        df['sentiment'] = df['polarity'].apply(getSentiment)
+    else:
+        for i in selected:
+            df['sentiment'+' '+str(i)] = df['polarity'+' '+str(i)].apply(getSentiment)
+    
+    # Display Dataframe        
+    button = st.radio('', ('👀 View Complete Dataframe', '👀 View Sample Dataframe'), 
+                      horizontal=True,
+                      label_visibility='collapsed')
+    if button == '👀 View Complete Dataframe':
         st.dataframe(df)
+    else:
+        st.dataframe(df.sample(5))
 
     
