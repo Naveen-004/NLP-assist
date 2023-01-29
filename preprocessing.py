@@ -31,7 +31,6 @@ def noStopWords(text):
   return text
 
 def nWords(df):
-  nltk.download('all')
   tokens = [word_tokenize(item) for item in df]
   len_tokens = []
   for i in range(len(tokens)):
