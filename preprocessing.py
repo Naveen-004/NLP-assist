@@ -18,16 +18,26 @@ def textClean(text):
     text = re.sub(r'^\s+','',text)  # remove starting extra spaces
     return text
 
-def tokenize(df, column):
-    tokens = [word_tokenize(item) for item in df[column]]
-    df['tokens'] = tokens
-    return df
+def tokenize(text):
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
+    return [token.text for token in doc]
 
-def noStopWords(text):
+def stopWords(text):
     nlp = spacy.load('en_core_web_sm')
     sentence = nlp(text)
     text = [word.text.strip() for word in sentence if not word.is_stop and not word.is_punct]
     return text
+
+def stemming(text):
+    stemmer = PorterStemmer()
+    text = [stemmer.stem(word) for word in text.split()]
+    return text
+
+def lemming(text):
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
+    return [token.lemma_ for token in doc]
 
 def nWords(text):
     nlp = spacy.load("en_core_web_sm")
@@ -42,16 +52,6 @@ def getSubjectivity(text):
   return TextBlob(text).sentiment.subjectivity  # type: ignore
 def getPolarity(text):
   return TextBlob(text).sentiment.polarity  # type: ignore
-
-def stemming(text):
-    stemmer = PorterStemmer()
-    text = [stemmer.stem(word) for word in text]
-    return text
-
-def lemming(text):
-    lemmatizer = WordNetLemmatizer()
-    text = [lemmatizer.lemmatize(word) for word in text]
-    return text
 
 def getSentiment(score):
     if score < 0:
