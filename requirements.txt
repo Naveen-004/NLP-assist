@@ -2,8 +2,6 @@ streamlit
 pandas
 spacy
 nltk
-heapq
-string
 langdetect
 re
 textblob
