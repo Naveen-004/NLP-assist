@@ -4,8 +4,8 @@ from preprocessing import *
 from collections import Counter
 
 st.title('NLP Assist')
-# file_up = st.file_uploader("Upload a file", type='csv')
-file_up = 'assets/Precily_Text_Similarity.csv'
+file_up = st.file_uploader("Upload a file", type='csv')
+# file_up = 'assets/Precily_Text_Similarity.csv'
 if file_up is not None:
     st.success("File uploaded successfully")
     df = pd.read_csv(file_up)
