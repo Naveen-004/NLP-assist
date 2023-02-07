@@ -67,7 +67,7 @@ def lemming(text):
 def ner(text):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
-    return print([(entity.text, entity.label_) for entity in doc.ents])
+    return [(entity.text, entity.label_) for entity in doc.ents]
 
 punctuation = punctuation + ' '
 def text_summarizer(text):
