@@ -1,6 +1,6 @@
+from tasks import *
 import pandas as pd
 import streamlit as st
-from preprocessing import *
 from collections import Counter
 
 st.title('NLP Assist')
@@ -29,19 +29,19 @@ if file_up is not None:
                     'Subjectivity', 'Polarity', 
                     'Sentiment']
         eda_select = st.multiselect('Select EDA Tasks', eda_tasks,
-                    help='EDA Tasks can be performed only on var_select variables')
+                    help='EDA Tasks can be performed only on selected variables')
         
         # Text Preprocessing
         st.subheader('Text Preprocessing')
         tp_tasks = ['Text cleaning', 'Stop Words removal','Tokenization','Stemming', 'Lemmatization']
         tp_select = st.multiselect('Select Text Preprocessing Tasks', tp_tasks,
-                        help='Text Preprocessing Tasks can be performed only on var_select variables and Text preprocessing is nothing but cleaning the text data to improve the quality of data for further analysis.')
+                    help='Text Preprocessing Tasks can be performed only on selected variables and Text preprocessing is nothing but cleaning the text data to improve the quality of data for further analysis.')
        
         # NLP models
         st.subheader('NLP Models')
         models = ['Named Entity Recognition', 'Text summarization']
-        model = st.selectbox('Select a model', models,
-                             help='Select a model to perform further analysis')    
+        model = st.selectbox('Select a model', models, 
+                help='Select a model to perform further analysis')    
 
     # EDA
     for i in eda_select:
@@ -112,12 +112,14 @@ if file_up is not None:
         data=csv,
         file_name='NLP_Assisted.csv',
         mime='text/csv',
+        help='''Download the dataframe in CSV format. CSV file consumes more disk space and time for both read and write compared to parquet format '''
     )
     st.download_button(
         label="Download Parquet",
         data=parquet,
         file_name='NLP_Assisted.parquet',
         mime='text/csv',
-    )
+        help='''Download the dataframe in parquet format. Parquet file consumes less disk space and time for both read and write '''
+        )
 
     
