@@ -9,15 +9,19 @@ Project aims to provide assistance for the developers performing NLP modelling. 
 This system performs the basic exploratory data analysis and text preprocessing required for NLP; in addition, it has the ability to create models through a web-based graphical user interface. It just requires a dataset as input, and our web GUI outputs a dataset based on the user's option of word or phrase analysis.The user does not need any prior coding knowledge.
 
 ## Process - 
-In this part, we begin with data cleansing, then feature selection, lexical analysis (tokenization, stop word removal, n gramme model, stemming, etc), followed by sentence level analysis (semantic, syntactic, pragmatic, and disclosure analysis). After finishing the textual analysis, we perform feature vectorization to convert the text data into a dense vector. The dense vector is then fed into the user-selected model. This section concludes with the creation of a user-friendly web-based interface that generates the desired output.
+In this part, we begin with data cleansing, then feature selection, lexical analysis (tokenization, stop word removal, n gram model, stemming, etc), followed by sentence level analysis (semantic, syntactic, pragmatic, and disclosure analysis). After finishing the textual analysis, we perform feature vectorization to convert the text data into a dense vector. The dense vector is then fed into the user-selected model. This section concludes with the creation of a user-friendly web-based interface that generates the desired output.
 
 ## SOFTWARE REQUIREMENTS
 - Operating System : Windows / Linux / Mac
 - IDE : Jupyter Notebook
-- Python libraries
+- Python libraries : Pandas, Numpy, spacy, gensim, NLTK, langdetect and textblob
 
 ## HARDWARE REQUIREMENTS
 - Ram 6GB+
 - Rom 128GB+
 - Intel i3 or higher processor
+
+NLP assist deployed <a href='https://nlp-assist.streamlit.app/'>here</a>
+
+
 
