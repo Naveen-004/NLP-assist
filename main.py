@@ -69,19 +69,19 @@ if file_up is not None:
     for i in tp_select:
         if i == 'Text cleaning':
             for i in var_select:
-                df['cleaned_text'+' '+str(i)] = df[i].apply(textClean)
+                df['cleanedText'+' '+str(i)] = df[i].apply(textClean)
         elif i == 'Stop Words removal':
             for i in var_select:
-                df['noStopWords_text'+' '+str(i)] = df[i].apply(stopWords)
+                df['noStopWordsText'+' '+str(i)] = df[i].apply(stopWords)
         elif i == 'Tokenization':
             for i in var_select:
-                df['tokenized_text'+' '+str(i)] = df[i].apply(tokenize)
+                df['tokenizedText'+' '+str(i)] = df[i].apply(tokenize)
         elif i == 'Stemming':
             for i in var_select:
-                df['stemmed_text'+' '+str(i)] = df[i].apply(stemming)
+                df['stemmedText'+' '+str(i)] = df[i].apply(stemming)
         elif i == 'Lemmatization':
             for i in var_select:
-                df['lemmatized_text'+' '+str(i)] = df[i].apply(lemming)
+                df['lemmatizedText'+' '+str(i)] = df[i].apply(lemming)
 
     # Models                   
     if model == 'Named Entity Recognition':
