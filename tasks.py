@@ -1,4 +1,5 @@
 import re
+import yake
 import spacy
 from heapq import nlargest
 from textblob import TextBlob
@@ -70,7 +71,7 @@ def ner(text):
     return [(entity.text, entity.label_) for entity in doc.ents]
 
 punctuation = punctuation + ' '
-def text_summarizer(text):
+def textSummarizer(text):
     nlp = spacy.load('en_core_web_sm')
     stopwords = list(STOP_WORDS)
     docx = nlp(text)
@@ -115,3 +116,20 @@ def text_summarizer(text):
     final_summary = [word.text for word in summary]
     summary = ' '.join(final_summary)
     return summary
+
+def keywordExtractor(text):
+    language = "en"
+    max_ngram_size = 3
+    deduplication_threshold = 0.9
+    deduplication_algo = 'seqm'
+    windowSize = 1
+    numOfKeywords = 20
+    custom_kw_extractor = yake.KeywordExtractor(lan=language, 
+                                               n=max_ngram_size, 
+                                               dedupLim=deduplication_threshold, 
+                                               dedupFunc=deduplication_algo, 
+                                               windowsSize=windowSize, 
+                                               top=numOfKeywords, 
+                                               features=None)
+    keywords = custom_kw_extractor.extract_keywords(text)
+    return keywords
