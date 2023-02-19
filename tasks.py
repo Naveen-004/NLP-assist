@@ -9,7 +9,7 @@ from nltk.stem import PorterStemmer
 from spacy.lang.en.stop_words import STOP_WORDS
 
 
-# EDA
+## EDA
 def nWords(text):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
@@ -32,7 +32,7 @@ def getSentiment(score):
     else:
       return "Positive"
 
-# Text Preprocessing
+## Text Preprocessing
 def textClean(text):
     text = re.sub(r'@[A-Za-z0-9]+', '', text) # removed @mentions
     text = re.sub(r'#','',text) # remove the hash tag
@@ -64,7 +64,7 @@ def lemming(text):
     doc = nlp(text)
     return [token.lemma_ for token in doc]
 
-# Models
+## Models
 def ner(text):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
@@ -111,7 +111,7 @@ def textSummarizer(text):
     # nlargest
     select_length = int(len(sentence_list)*0.3)
     summary = nlargest(select_length, sentence_scores, 
-                       key=sentence_scores.get)
+                       key=sentence_scores.get) # type: ignore
 
     final_summary = [word.text for word in summary]
     summary = ' '.join(final_summary)
