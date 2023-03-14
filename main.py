@@ -102,12 +102,12 @@ if file_up is not None:
     if button == '👀 View Complete Dataframe':
         st.dataframe(df)
         csv = df.to_csv(index=False)
-        # parquet = df.to_parquet(index=False)
+        parquet = df.to_parquet(index=False)
     else:
         var_select_col = st.multiselect('Select Variables', df.columns)
         st.dataframe(df[var_select_col])
         csv = df[var_select_col].to_csv(index=False)
-        # parquet = df[var_select_col].to_parquet(index=False)
+        parquet = df[var_select_col].to_parquet(index=False)
 
     # Download Dataframe
     st.download_button(
@@ -117,12 +117,12 @@ if file_up is not None:
         mime='text/csv',
         help='''Download the dataframe in CSV format. CSV file consumes more disk space and time for both read and write compared to parquet format '''
     )
-    # st.download_button(
-    #     label="Download Parquet",
-    #     data=parquet,
-    #     file_name='NLP_Assisted.parquet',
-    #     mime='text/csv',
-    #     help='''Download the dataframe in parquet format. Parquet file consumes less disk space and time for both read and write '''
-    #     )
+    st.download_button(
+        label="Download Parquet",
+        data=parquet,
+        file_name='NLP_Assisted.parquet',
+        mime='text/csv',
+        help='''Download the dataframe in parquet format. Parquet file consumes less disk space and time for both read and write '''
+        )
 
     
