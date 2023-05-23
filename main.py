@@ -39,7 +39,7 @@ if file_up is not None:
        
         # NLP models
         st.subheader('NLP Models')
-        models = ["Choose an option",'Named Entity Recognition', 'Text summarization', 'Keyword Extraction']
+        models = ['Named Entity Recognition', 'Text summarization', 'Keyword Extraction']
         model = st.selectbox('Select a model', models, 
                 help='Select a model to perform further analysis')    
 
@@ -93,8 +93,8 @@ if file_up is not None:
     elif model == 'Keyword Extraction':
         for i in var_select:
             df['Keyword Extraction'+' '+str(i)] = df[i].apply(keywordExtractor)
-    else:
-        pass
+    # else:
+    #     pass
     
     # Display Dataframe        
     button = st.radio('', ('👀 View Complete Dataframe',
