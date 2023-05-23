@@ -8,7 +8,7 @@ file_up = st.file_uploader("Upload a file", type='csv')
 # file_up = 'assets/Precily_Text_Similarity.csv'
 if file_up is not None:
     st.success("File uploaded successfully")
-    df = pd.read_csv(file_up)
+    df = pd.read_csv(file_up, encoding= 'unicode_escape')
     df.dropna(inplace=True)
     obj = []
     for i in df.columns:
