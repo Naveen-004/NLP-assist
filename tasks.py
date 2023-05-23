@@ -1,6 +1,7 @@
 import re
 import yake
 import spacy
+from spacy.tokens import Doc
 from heapq import nlargest
 from textblob import TextBlob
 from string import punctuation
