@@ -7,4 +7,3 @@ requests
 langdetect
 textblob
 yake
-python-utils
